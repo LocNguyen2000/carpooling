@@ -12,7 +12,7 @@ import RegisterForm from "./components/product/RegisterForm";
 import PassengerRegisterForm from "./components/product/PassengerlRegister";
 import DriverRegisterForm from "./components/product/DriverRegister";
 import IntroductionForm from "./components/product/IntroductionForm";
-import ProfileForm from "./components/product/ProfileForm";
+import PassengerProfileForm from "./components/product/PassengerProfileForm";
 import DriverProfileForm from "./components/product/DriverProfileForm";
 import UserGuildForm from "./components/product/UserGuildForm";
 import GroupForm from "./components/product/GroupForm";
@@ -37,7 +37,7 @@ function App() {
             <Route path="/personal-register" component={PassengerRegisterForm} />
             <Route path="/group-register" component={DriverRegisterForm} />
             <Route path="/group" component={GroupForm} />
-            <Route path="/profile" component={ProfileForm} />
+            <Route path="/profile" component={PassengerProfileForm} />
             <Route path="/driver-profile" component={DriverProfileForm} />
             <Route path="/intro" component={IntroductionForm} />
             <Route path="/guild" component={UserGuildForm} />

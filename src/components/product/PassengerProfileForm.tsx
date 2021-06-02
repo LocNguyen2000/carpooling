@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProfileForm() {
+function PassengerProfileForm() {
   return (
     <div className="container rounded bg-white mt-5 mb-5">
       <div className="row">
@@ -53,20 +53,26 @@ function ProfileForm() {
               </div>
               <div className="col-md-12  pt-3">
                 <label className="labels">Gender</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="enter gender"
-                  value="Female"
-                />
+                <select
+                    className="form-control"
+                    data-style="btn-primary"
+                    data-width="20px"
+                    data-size="2"
+                    // value="Female"
+                    placeholder="Female"
+                  >
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Others</option>
+                  </select>
               </div>
               <div className="col-md-12 pt-3">
                 <label className="labels">Detour</label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="edit detour distance"
-                  value="2km"
+                  placeholder="edit detour distance (km)"
+                  value="2"
                 />
               </div>
             </div>
@@ -129,12 +135,20 @@ function ProfileForm() {
                 </div>
                 <div className="col-md-6">
                   <label className="labels">Start City</label>
-                  <input
-                    type="text"
+                  <select
                     className="form-control"
-                    value="Hanoi"
-                    placeholder="Hanoi"
-                  />
+                    data-style="btn-primary"
+                    data-width="20px"
+                    data-size="5"
+                    // value="Hanoi"
+                    // placeholder="Hanoi"
+                  >
+                    <option>Ha Noi</option>
+                    <option>Bac Ninh</option>
+                    <option>Hung Yen</option>
+                    <option>Bac Giang</option>
+                    <option>Vinh Phuc</option>
+                  </select>
                 </div>
               </div>
               <div className="row mt-3 px-3">
@@ -144,7 +158,7 @@ function ProfileForm() {
                     type="text"
                     className="form-control"
                     placeholder="7:00 a.m"
-                    value="7:00 a.m"
+                    // value="7:00"
                   />
                 </div>
                 <div className="col-md-6">
@@ -153,7 +167,7 @@ function ProfileForm() {
                     type="text"
                     className="form-control"
                     placeholder="7:30 a.m"
-                    value="7:30 a.m"
+                    // value="7:30"
                   />
                 </div>
               </div>
@@ -166,7 +180,9 @@ function ProfileForm() {
                   value="Female only"
                 />
               </div>
-              <div className="form-control " style= {{"opacity": "0"}}> </div>
+              <div className="form-control " style={{ opacity: "0" }}>
+                {" "}
+              </div>
             </div>
             <div className="d-flex flex-column">
               <h5 className="text-left pl-3">Finish Information</h5>
@@ -182,12 +198,20 @@ function ProfileForm() {
                 </div>
                 <div className="col-md-6">
                   <label className="labels">Finish City</label>
-                  <input
-                    type="text"
+                  <select
                     className="form-control"
-                    value="Ha Noi"
-                    placeholder="start-city"
-                  />
+                    data-style="btn-primary"
+                    data-width="20px"
+                    data-size="5"
+                    // value="Hanoi"
+                    // placeholder="Hanoi"
+                  >
+                    <option>Ha Noi</option>
+                    <option>Bac Ninh</option>
+                    <option>Hung Yen</option>
+                    <option>Bac Giang</option>
+                    <option>Vinh Phuc</option>
+                  </select>
                 </div>
               </div>
               {/* <div className="col-md-12">
@@ -210,10 +234,13 @@ function ProfileForm() {
                 />
               </div>
               <div className="mt-4 text-center">
-              <button className="btn btn-primary profile-button" type="button">
-                Save Rideshare Profile
-              </button>
-            </div>
+                <button
+                  className="btn btn-primary profile-button"
+                  type="button"
+                >
+                  Save Rideshare Profile
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -222,4 +249,4 @@ function ProfileForm() {
   );
 }
 
-export default ProfileForm;
+export default PassengerProfileForm;
