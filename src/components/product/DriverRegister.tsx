@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 // import
 // const LoginForm = ({submitLogin}) => {
 //     const { handleChange, values, handleSubmit, errors}
@@ -8,14 +9,10 @@ import { Link } from "react-router-dom";
 
 type Profile = {
   name: string;
-  type: boolean;
+  username: string;
+  email: string;
   gender: boolean;
   phone: string;
-  vehicleType: string;
-  vehicleManufacture: string;
-  vehicleSeat: number;
-  vehicleLicense: string;
-  licensePlate: string;
   password: string;
   password2: string;
 };
@@ -28,8 +25,21 @@ const DriverRegisterForm = () => {
   } = useForm<Profile>();
 
   const onSubmit = handleSubmit((data) => {
+    console.log(data);
     // alert(JSON.stringify(data));
-    console.log("data");
+    axios.post("https://carpooling-deploy.herokuapp.com/register-driver", {
+      username: data.username,
+      displayname: data.name,
+      email: data.email,
+      password: data.password,
+      phone: data.phone
+    }).then(res => {
+      console.log("Driver Register Success: ", res.data);
+      // window.location.pathname = "/home"
+    }).catch(err => {
+      console.log(err);
+      
+    })
   });
   // isConstructorDeclaration(this.props.)
   return (
@@ -62,6 +72,67 @@ const DriverRegisterForm = () => {
             </div>
           </div>
           <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Username</label>
+            <div className="col-sm-10">
+              <input
+                {...register("username", {
+                  required: true,
+                })}
+                type="text"
+                className="form-control"
+                placeholder="Enter Username"
+              />
+              {errors.username && <div className="error text-danger">Enter Username</div>}
+            </div>
+          </div>
+          
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Gender</label>
+            <div className="row-sm-10 pl-3 pt-3">
+              <div className="custom-control custom-radio custom-control-inline">
+                <input
+                  className="custom-control-input"
+                  type="checkbox"
+                  id="inlineCheckbox1"
+                  value="option1"
+                />
+                <label className="custom-control-label">Male</label>
+              </div>
+              <div className="custom-control custom-radio custom-control-inline">
+                <input
+                  className="custom-control-input"
+                  type="checkbox"
+                  id="inlineCheckbox2"
+                  value="option2"
+                />
+                <label className="custom-control-label">Female</label>
+              </div>
+              <div className="custom-control custom-radio custom-control-inline">
+                <input
+                  className="custom-control-input"
+                  type="checkbox"
+                  id="inlineCheckbox3"
+                  value="option3"
+                />
+                <label className="custom-control-label">Others</label>
+              </div>
+            </div>
+          </div>
+          <div className="form-group row">
+            <label className="col-sm-2 col-form-label">Email</label>
+            <div className="col-sm-10">
+              <input
+                {...register("email", {
+                  required: true,
+                })}
+                type="text"
+                className="form-control"
+                placeholder="Enter Your Email"
+              />
+              {errors.email && <div className="error">Enter Email</div>}
+            </div>
+          </div>
+          <div className="form-group row">
             <label className="col-sm-2 col-form-label">Phone</label>
             <div className="col-sm-10">
               <input
@@ -78,78 +149,7 @@ const DriverRegisterForm = () => {
               {errors.phone && <div className="error">Enter Phone Number</div>}
             </div>
           </div>
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Vehicle Type</label>
-            <div className="col-sm-10">
-              <div className="row-sm-10 pt-3">
-                <div className="custom-control custom-radio custom-control-inline">
-                  <input
-                    className="custom-control-input"
-                    type="checkbox"
-                    id="inlineCheckbox1"
-                    // value="option1"
-                  />
-                  <label className="custom-control-label">Car</label>
-                </div>
-                <div className="custom-control custom-radio custom-control-inline">
-                  <input
-                    className="custom-control-input"
-                    type="checkbox"
-                    id="inlineCheckbox2"
-                    // value="option2"
-                  />
-                  <label className="custom-control-label">Motorbike</label>
-                </div>
-                <div className="pb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Others"
-                    value="Others"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">
-              Vehicle Manufacture
-            </label>
-            <div className="col-sm-10">
-              <input
-                {...register("vehicleManufacture", {
-                  required: true,
-                  // pattern: /^[A-Za-z]+$/i,
-                })}
-                type="text"
-                className="form-control"
-                placeholder="Subaru"
-              />
-              {errors.vehicleManufacture && (
-                <div className="error text-danger">Enter Vehicle Manufacture</div>
-              )}
-            </div>
-          </div>
-
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">License Plate</label>
-            <div className="col-sm-10">
-              <input
-                {...register("licensePlate", {
-                  required: true,
-                  pattern: /^[^+_=/*?@#$%&()'"|â„;:{}.,`~<>}{][^\\]{1,20}$/g,
-                })}
-                type="text"
-                className="form-control"
-                placeholder="30H5-7692"
-              />
-              {errors.licensePlate && (
-                <div className="error text-danger">Enter License Plate </div>
-              )}
-            </div>
-          </div>
-
+          
           <div className="form-group row">
             <label className="col-sm-2 col-form-label">Password</label>
             <div className="col-sm-10">
@@ -177,50 +177,12 @@ const DriverRegisterForm = () => {
             </div>
           </div>
 
-          <div className="form-group row">
-            <label className="col-sm-2 col-form-label">Driver License</label>
-            <div className="col-sm-10">
-              <input
-                {...register("vehicleLicense", { required: true })}
-                type="file"
-                className="pt-2"
-                id="customFile"
-              />
-              {errors.vehicleLicense && (
-                <div className="error text-danger">Re-enter vehicle license</div>
-              )}
-            </div>
-          </div>
-
-          {/* <div className="d-flex mb-4 align-items-center">
-            <label className="control control--checkbox mb-0 order-sm-1">
-              <span className="caption pl-3">
-                Tôi muốn được kết nối với cơ hội góp sức phù hợp{" "}
-              </span>
-            </label>
-            <span className="ml-auto">
-              <input type="checkbox" value="follow" />
-            </span>
-            <span className="clearfix"></span>
-          </div>
-          <div className="d-flex mb-4 align-items-center">
-            <label className="control control--checkbox mb-0 order-sm-1">
-              <span className="caption pl-3">
-                Chọn mục này nếu bạn muốn nhận tin tức về hoạt động tình nguyện{" "}
-              </span>
-            </label>
-
-            <span className="ml-auto ">
-              <input type="checkbox" value="get-information" />
-            </span>
-          </div> */}
-          
           <button
             type="submit"
             className="btn btn-pill btn-warning rounded text-end order-sm-1 float-right font-weight-bold"
           >
             <Link
-              to="/Register"
+              to="/register"
               target=""
               aria-label="Register"
               className="text-black"
@@ -233,14 +195,9 @@ const DriverRegisterForm = () => {
             className="btn btn-pill btn-primary rounded text-end order-sm-1 float-right font-weight-bold  mr-3"
             onClick={onSubmit}
           >
-            <Link
-              to="/MainForm"
-              target="_blank"
-              aria-label="Register"
-              className="text-white"
-            >
+            
               Register
-            </Link>
+            
           </button>
         </section>
       </form>
