@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Modal } from 'react-bootstrap'
 import axios from 'axios';
 import * as  Yup from 'yup'
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import '../../css/LoginForm.css'
+import { userServices } from "../../services";
 
 const LoginForm = () => {
   // const { authUser, setAuthUser } = useContext(AuthUserCtx);
@@ -12,7 +13,10 @@ const LoginForm = () => {
   const [login, setLogin] = useState(false);
   const [registing, setRegisting] = useState(false)
 
-  
+  useEffect(() => {
+    userServices.search().then(res => console.log(res))
+  },[]);
+
   const initialValues_ = {
     username: "",
     password: ""
