@@ -1,105 +1,98 @@
-import { profile } from "console";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-// import
-// const LoginForm = ({submitLogin}) => {
-//     const { handleChange, values, handleSubmit, errors}
-// }
-
-type Profile = {
-  phone: string;
-  password: string;
-};
+// import { useForm } from "react-hook-form";
+// import { Link } from "react-router-dom";
+import { Container, Modal } from 'react-bootstrap'
+import axios from 'axios';
+import * as  Yup from 'yup'
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import '../../css/LoginForm.css'
 
 const LoginForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Profile>();
+  // const { authUser, setAuthUser } = useContext(AuthUserCtx);
+  const [isError, setError ] = useState(false)
+  const [show, setShow] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [registing, setRegisting] = useState(false)
 
-  const onSubmit = handleSubmit((data) => {
-    // alert(JSON.stringify(data));
-    console.log("data");
+  
+  const initialValues_ = {
+    username: "",
+    password: ""
+  };
+
+  const validationSchema_ = Yup.object().shape({
+    username: Yup.string()
+      .required("Username is required!"),
+    password: Yup.string()
+      .required("Password is required!"),
   });
-  // isConstructorDeclaration(this.props.)
-  return (
-    <div className="container-fluid justify-content-center pt-5 bg-light">
-      <form className="justify-content-center rounded row" onSubmit={onSubmit}>
-        <section className="col-12 col-sm-6 col-md-4 rounded p-4 bg-white">
-          <h3 className="text-center pt-3">LOGIN</h3>
 
-          <div className="form-group pt-3">
-            <label>Phone Number</label>
-            <input
-              {...register("phone", {
-                required: true,
-                pattern: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/g,
-              })}
-              type="text"
-              className="form-control"
-              placeholder="Enter phone number"
-              //  value = {values.email}
-              //  onChange = {handleChange}
-            />
-            {errors.phone && <div className="error text-danger">Enter invalid phone number</div>}
-          </div>
+  const onSubmit_ = (data) => {
+    console.log(data);
+    axios.post("https://carpooling-deploy.herokuapp.com/authenticate", {
+      username: data.username,
+      password: data.password
+    }).then((res) => {
+      console.log("Post: ", res.data);
+      
+    }).catch(err =>{
+      console.log(err);
+    })
+  }
+  
+  const onClose = (setFieldValue) => {
+    setShow(false); 
+    setError(true);
 
-          <div className="form-group">
+    setFieldValue("username", "");
+    setFieldValue("password", "");
+  }
+
+
+    return (<Formik
+    initialValues={initialValues_}
+    validationSchema={validationSchema_}
+    onSubmit={onSubmit_}
+  >
+    {({values,
+      errors,
+      setFieldValue,
+      isValid}) => {
+      return (
+        <Container className="login">
+          <Modal show={show && isError} onHide={() => {onClose(setFieldValue)}}>
+            <Modal.Header closeButton>
+              <span>Error</span>
+            </Modal.Header>
+          </Modal>
+          <Form>
+            
+            <h3 className="text-center pt-3">LOGIN</h3>
+            <label>Username</label>
+            <Field className="field" type="text" name="username" value={values.username}/>
+            <ErrorMessage className="error" name="username" component="div" />
             <label>Password</label>
-            <input
-              {...register("password", { required: true })}
-              type="password"
-              className="form-control"
-              placeholder="Enter password"
-            />
-            {errors.password && <div className="error text-danger">Enter password</div>}
-          </div>
+            <Field className="field" type="password" name="password" value={values.password}/>
+            <ErrorMessage className="error" name="password" component="div" />
 
-          <div className="d-flex mb-4 align-items-center">
-            {/* <div className="custom-control custom-checkbox">
-                <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                <p className="forgot-password text-right">
-            Forgot <a href="#">password?</a> 
-                   
-        </p>
-            </div>*/}
-            <label className="control control--checkbox mb-0">
-              <span className="caption">Remember me </span>
-              <input type="checkbox" value="remember-me" />
-              {/* <div className = "control-indicator"></div> */}
-            </label>
-            <span className="ml-auto">
-              <a href="#" className="forgot-pass">
-                Forgot password?{" "}
+            <div className="button-wrapper">
+              <button
+                className="button"
+                type="submit"
+                disabled={login && !isValid}
+              >
+                {login ? "Login..." : "Login"}
+                </button>
+            </div>
+
+            <a href="/register" >
+              Not have an account yet? Register
               </a>
-            </span>
-            <span className="clearfix"></span>
-          </div>
+          </Form>
+        </Container>
+      );
+    }}
+  </Formik>
+)}
 
-          <button
-            type="submit"
-            className="btn btn-pill text-white btn-block btn-primary fw-bolder"
-          >
-            <Link to="/home" target="_blank" aria-label="Register" className = "text-white">
-              Login
-            </Link>
-          </button>
-
-          <div className="d-flex mt-4 mb-2 align-items-center">
-            <span className="caption"> Don't have an account?</span>
-            <span className="ml-auto">
-              {/* <a href="#">Đăng ký ngay</a> */}
-              <Link to="/register" target="_blank" aria-label="Register" >
-                Register now!
-              </Link>
-            </span>
-          </div>
-        </section>
-      </form>
-    </div>
-  );
-};
 export default LoginForm;
