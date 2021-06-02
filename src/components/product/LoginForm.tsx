@@ -34,9 +34,13 @@ const LoginForm = () => {
       password: data.password
     }).then((res) => {
       console.log("Post: ", res.data);
-      
+      if (res.data.token != null){
+        console.log("Login Successfully");
+        window.location.pathname = "/home"
+      }
+
     }).catch(err =>{
-      console.log(err);
+      console.log("Error: ", err);
     })
   }
   
