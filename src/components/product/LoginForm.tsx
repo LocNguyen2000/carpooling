@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import { useForm } from "react-hook-form";
-// import { Link } from "react-router-dom";
 import { Container, Modal } from 'react-bootstrap'
 import axios from 'axios';
 import * as  Yup from 'yup'
@@ -38,7 +36,6 @@ const LoginForm = () => {
         console.log("Login Successfully");
         window.location.pathname = "/home"
       }
-
     }).catch(err =>{
       console.log("Error: ", err);
     })

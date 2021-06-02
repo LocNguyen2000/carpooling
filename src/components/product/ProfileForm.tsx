@@ -12,7 +12,6 @@ function ProfileForm() {
             />
             <span className="pt-3 font-weight-bold">Le Tam</span>
             <span className="pb-2 font-weight-bold">Passenger</span>
-
             <span className="text-black-50">(+84) 0123756522</span>
           </div>
         </div>
