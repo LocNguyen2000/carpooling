@@ -255,31 +255,32 @@ export const SideBar = () => {
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <ul className="nav">
           <li className="nav-item">
-            <a className="nav-link" href="index.html">
+            <a className="nav-link" href="/home">
               <i className="icon-grid menu-icon"></i>
               <span className="menu-title text-white">
-                <Link to="/home">Home</Link>
+                Home
               </span>
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="pages/widgets/widgets.html">
+            <a className="nav-link" href="/intro">
               <i className="icon-cog menu-icon"></i>
               <span className="menu-title">
-              <Link to="/intro">Introduction</Link></span>
+              Introduction
+              </span>
             </a>
           </li>
           <li className="nav-item">
             <a
               className="nav-link"
               data-toggle="collapse"
-              href="#ui-basic"
+              href="/profile"
               aria-expanded="false"
               aria-controls="ui-basic"
             >
               <i className="icon-layout menu-icon"></i>
               <span className="menu-title">
-                <Link to="/profile">Profile</Link>
+                Profile
               </span>
             </a>
           </li>
@@ -287,13 +288,13 @@ export const SideBar = () => {
             <a
               className="nav-link"
               data-toggle="collapse"
-              href="#ui-advanced"
+              href="/group"
               aria-expanded="false"
               aria-controls="ui-advanced"
             >
               <i className="icon-image menu-icon"></i>
               <span className="menu-title">
-                <Link to="/group">Group</Link>
+                Group
               </span>
             </a>
           </li>
@@ -301,13 +302,13 @@ export const SideBar = () => {
             <a
               className="nav-link"
               data-toggle="collapse"
-              href="#form-elements"
+              href="/guild"
               aria-expanded="false"
               aria-controls="form-elements"
             >
               <i className="icon-columns menu-icon"></i>
               <span className="menu-title">
-                <Link to="/guild">User Guild</Link>
+                User Guild
               </span>
             </a>
           </li>

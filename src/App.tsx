@@ -31,16 +31,15 @@ function App() {
           <SideBar />
           <Switch>
             <Route path="/" exact component={MainForm} />
-            <Route path="/home" exact component={MainForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/personal-register" component={PassengerRegisterForm} />
-            <Route path="/group-register" component={DriverRegisterForm} />
+            <Route path="/driver-register" component={DriverRegisterForm} />
             <Route path="/group" component={GroupForm} />
             <Route path="/profile" component={ProfileForm} />
             <Route path="/driver-profile" component={DriverProfileForm} />
-            <Route path="/intro" component={IntroductionForm} />
-            <Route path="/guild" component={UserGuildForm} />
+            {/* <Route path="/intro" component={IntroductionForm} /> */}
+            {/* <Route path="/guild" component={UserGuildForm} /> */}
             <Route path="/find-group" component={ChooseGroup} />
             <Route path="/create-group" component={CreateGroup} />
 
