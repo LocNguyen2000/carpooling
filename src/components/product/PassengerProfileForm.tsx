@@ -1,6 +1,6 @@
 import React from "react";
 
-function ProfileForm() {
+function PassengerProfileForm() {
   return (
     <div className="container rounded bg-white mt-5 mb-5">
       <div className="row">
@@ -222,4 +222,4 @@ function ProfileForm() {
   );
 }
 
-export default ProfileForm;
+export default PassengerProfileForm;

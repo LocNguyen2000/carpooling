@@ -1,6 +1,6 @@
 import React from "react";
 
-function UserGuildForm() {
+function UserGuideForm() {
   return (
     <div>
       Environmental pollution has become a controversial issue that puts severe
@@ -17,4 +17,4 @@ function UserGuildForm() {
   );
 }
 
-export default UserGuildForm;
+export default UserGuideForm;
