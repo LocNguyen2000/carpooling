@@ -27,7 +27,7 @@ export const NavBar = () => {
           </li>
         </ul>
         <ul className="navbar-nav navbar-nav-right">
-          <li className="nav-item dropdown">
+          {/* <li className="nav-item dropdown">
             <a className="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
               <i className="icon-bell mx-0"></i>
               <span className="count"></span>
@@ -74,7 +74,7 @@ export const NavBar = () => {
                 </div>
               </a>
             </div>
-          </li>
+          </li> */}
           <li className="nav-item nav-profile dropdown">
             <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="../../images/faces/face28.jpg" alt="profile"/>
@@ -90,11 +90,11 @@ export const NavBar = () => {
               </a>
             </div>
           </li>
-          <li className="nav-item nav-settings d-none d-lg-flex">
+          {/* <li className="nav-item nav-settings d-none d-lg-flex">
             <a className="nav-link" href="#">
               <i className="icon-ellipsis"></i>
             </a>
-          </li>
+          </li> */}
         </ul>
         <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span className="icon-menu"></span>

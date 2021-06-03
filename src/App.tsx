@@ -31,7 +31,6 @@ function App() {
           <SideBar />
           <Switch>
             <Route path="/" exact component={MainForm} />
-            <Route path="/home" exact component={MainForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/passenger-register" component={PassengerRegisterForm} />
