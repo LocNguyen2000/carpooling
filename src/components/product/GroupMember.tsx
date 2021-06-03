@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import "./ChooseGroup.css";
 
 function GroupMember() {
-    return (
+  return (
     <div className="container-fluid justify-content-center p-3 bg-light">
       <form className="justify-content-center rounded row">
         <section className="col-12 col-sm-12 col-md-10 rounded">
@@ -66,9 +66,13 @@ function GroupMember() {
             <div className="col-md-6 p-3 border">
               <div className="d-flex flex-column text-align-center">
                 <div className="row">
-                  <div className="col-md-2 border-right">Member</div>
-                  <div className="col-md-10 border-right">
-                    <div className="row pb-2 border-bottom text-danger">
+                <div className="col-md-4">Available Seats: </div>
+                  <div className="row pb-1 ">
+                    <div className="col-md-12 pr-5">1</div>
+                  </div>
+                  <div className="col-md-12 font-weight-normal pb-2">Member:</div>
+                  <div className="col-md-10">
+                    <div className="row pb-2 text-danger">
                       <div className="col-md-12">Driver: Le Tam </div>
                       <div className="col-md-12">Phone number: 0338566329</div>
                     </div>
@@ -85,6 +89,7 @@ function GroupMember() {
                       <div className="col-md-12">Phone number: 0338566329</div>
                     </div>
                   </div>
+                 
                 </div>
               </div>
             </div>
