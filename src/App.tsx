@@ -9,12 +9,12 @@ import { MainForm } from "./components/MainForm";
 
 import LoginForm from "./components/product/LoginForm";
 import RegisterForm from "./components/product/RegisterForm";
-import PassengerRegisterForm from "./components/product/PassengerlRegister";
+import PassengerRegisterForm from "./components/product/PassengerRegister";
 import DriverRegisterForm from "./components/product/DriverRegister";
 import IntroductionForm from "./components/product/IntroductionForm";
 import PassengerProfileForm from "./components/product/PassengerProfileForm";
 import DriverProfileForm from "./components/product/DriverProfileForm";
-import UserGuildForm from "./components/product/UserGuildForm";
+import UserGuideForm from "./components/product/UserGuideForm";
 import GroupForm from "./components/product/GroupForm";
 import ChooseGroup from "./components/product/ChooseGroup";
 import CreateGroup from "./components/product/CreateGroup";
@@ -26,6 +26,7 @@ function App() {
   return (
     <React.Fragment>
       <Router>
+        
         <NavBar></NavBar>
         <div className="container-fluid page-body-wrapper">
           <SideBar />
@@ -34,13 +35,13 @@ function App() {
             <Route path="/home" exact component={MainForm} />
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={RegisterForm} />
-            <Route path="/personal-register" component={PassengerRegisterForm} />
-            <Route path="/group-register" component={DriverRegisterForm} />
+            <Route path="/passenger-register" component={PassengerRegisterForm} />
+            <Route path="/driver-register" component={DriverRegisterForm} />
             <Route path="/group" component={GroupForm} />
-            <Route path="/profile" component={PassengerProfileForm} />
+            <Route path="/passenger-profile" component={PassengerProfileForm} />
             <Route path="/driver-profile" component={DriverProfileForm} />
             <Route path="/intro" component={IntroductionForm} />
-            <Route path="/guild" component={UserGuildForm} />
+            <Route path="/guide" component={UserGuideForm} />
             <Route path="/find-group" component={ChooseGroup} />
             <Route path="/create-group" component={CreateGroup} />
 
