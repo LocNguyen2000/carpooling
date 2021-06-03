@@ -26,6 +26,7 @@ function App() {
   return (
     <React.Fragment>
       <Router>
+        
         <NavBar></NavBar>
         <div className="container-fluid page-body-wrapper">
           <SideBar />

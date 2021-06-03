@@ -36,12 +36,18 @@ function DriverProfileForm() {
               </div>
               <div className="col-md-6">
               <label className="labels">Gender</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="enter gender"
-                  value="Female"
-                />
+                <select
+                    className="form-control"
+                    data-style="btn-primary"
+                    data-width="20px"
+                    data-size="3"
+                    // value="Female"
+                    placeholder="Female"
+                  >
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Others</option>
+                  </select>
                 </div>
                 </div>
                 <div className="row mt-3">
@@ -90,12 +96,17 @@ function DriverProfileForm() {
               <div className="row mt-3">
                 <div className="col-md-6">
                   <label className="labels">Type</label>
-                  <input
-                    type="text"
+                  <select
                     className="form-control"
-                    placeholder="start-location"
-                    value="Car"
-                  />
+                    data-style="btn-primary"
+                    data-width="20px"
+                    data-size="2"
+                    // value="Female"
+                    placeholder="Female"
+                  >
+                    <option>Car</option>
+                    <option>Motorbike</option>
+                  </select>
                 </div>
                 <div className="col-md-6">
                   <label className="labels">Manufacture</label>
@@ -119,7 +130,34 @@ function DriverProfileForm() {
                 </div>
                 <div className="col-md-6">
                   <label className="labels">Driver License</label>
-                  <input type="file" className="pt-2" id="customFile" />
+                  {/* <input type="file" className="pt-2" id="customFile" /> */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="License Plate"
+                    value="S998801"
+                  />
+                </div>
+                </div>
+                <div className="row mt-3">
+                <div className="col-md-6">
+                  <label className="labels">License Start Date</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="License Start Date"
+                    value="04.05.2010"
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label className="labels">License Expire Date</label>
+                  {/* <input type="file" className="pt-2" id="customFile" /> */}
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="License Expire Date"
+                    value="04.05.2030"
+                  />
                 </div>
               </div>
               {/* <div className="col-md-12">
@@ -179,12 +217,12 @@ function DriverProfileForm() {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="7:00 a.m"
-                    value="7:00 a.m"
+                    placeholder="7:00"
+                    // value="7:00m"
                   />
                 </div>
                 <div className="col-md-6">
-                  <label className="labels">Available Seats</label>
+                  <label className="labels">Seats</label>
                   <input
                     type="text"
                     className="form-control"
@@ -204,12 +242,30 @@ function DriverProfileForm() {
                 </div>
                 <div className="col-md-12 pt-3 pb-3">
                   <label className="labels">Start City</label>
-                  <input
-                    type="text"
+                  <select
                     className="form-control"
-                    value="Hanoi"
-                    placeholder="Hanoi"
-                  />
+                    data-style="btn-primary"
+                    data-width="20px"
+                    data-size="5"
+                    // value="Hanoi"
+                    // placeholder="Hanoi"
+                  >
+                    <option>Ha Noi</option>
+                    <option>Bac Ninh</option>
+                    <option>Hung Yen</option>
+                    <option>Bac Giang</option>
+                    <option>Vinh Phuc</option>
+                  </select>
+                </div>
+                <div className="col-md-12 pt-3 pb-3">
+
+                <label className="labels">Additional Details</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="additional details"
+                  // value="Female only"
+                />
                 </div>
               
               <div className="col-md-12 pt-3 pb-3">
@@ -217,18 +273,26 @@ function DriverProfileForm() {
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="start-location"
-                    value="12 Ly Nam De"
+                    placeholder="12 Ly Nam De"
+                    // value="12 Ly Nam De"
                   />
                 </div>
                 <div className="col-md-12 pt-3 pb-3">
                   <label className="labels">Finish City</label>
-                  <input
-                    type="text"
+                  <select
                     className="form-control"
-                    value="Ha Noi"
-                    placeholder="start-city"
-                  />
+                    data-style="btn-primary"
+                    data-width="20px"
+                    data-size="5"
+                    // value="Hanoi"
+                    // placeholder="Hanoi"
+                  >
+                    <option>Ha Noi</option>
+                    <option>Bac Ninh</option>
+                    <option>Hung Yen</option>
+                    <option>Bac Giang</option>
+                    <option>Vinh Phuc</option>
+                  </select>
                 </div>
               <div className="col-md-12 pt-3 pb-3">
                 <label className="labels">Additional Details</label>

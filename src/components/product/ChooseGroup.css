@@ -1,4 +1,4 @@
-.card {
+.card-group {
   width: 450px;
   height: 300px;
   background-color: #fff;
@@ -154,3 +154,26 @@
   right: 1rem;
   font-size: 0.9em;
 }
+
+@media screen and (max-width: 768px) {
+.groups{
+  flex-direction: column;
+}
+}
+@media screen and (max-width: 568px) {
+  .groups{
+    flex-direction: column;
+  }
+  .additional{
+    display: none;
+  }
+  .general{
+    margin-right: 10%;
+  }
+  h3{
+    color: purple;
+    padding-top: 5px;
+    /* text-align: left; */
+  }
+  
+  }
