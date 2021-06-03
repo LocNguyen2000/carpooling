@@ -279,7 +279,7 @@ export const SideBar = () => {
             >
               <i className="icon-layout menu-icon"></i>
               <span className="menu-title">
-                <Link to="/profile">Profile</Link>
+                <Link to="/passenger-profile">Profile</Link>
               </span>
             </a>
           </li>
@@ -307,7 +307,7 @@ export const SideBar = () => {
             >
               <i className="icon-columns menu-icon"></i>
               <span className="menu-title">
-                <Link to="/guild">User Guild</Link>
+                <Link to="/guide">User Guide</Link>
               </span>
             </a>
           </li>
