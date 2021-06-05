@@ -77,16 +77,16 @@ export const NavBar = () => {
           </li> */}
           <li className="nav-item nav-profile dropdown">
             <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="../../images/faces/face28.jpg" alt="profile"/>
+              <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="profile"/>
             </a>
             <div className="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a className="dropdown-item">
+              {/* <a className="dropdown-item">
                 <i className="ti-settings text-primary"></i>
                 Settings
-              </a>
+              </a> */}
               <a className="dropdown-item">
                 <i className="ti-power-off text-primary"></i>
-                <Link to = "/login">Logout</Link> 
+                <Link to = "/login" onClick={() => localStorage.clear()} style={{color: '#000'}}>Logout</Link> 
               </a>
             </div>
           </li>

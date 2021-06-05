@@ -26,10 +26,7 @@ function App() {
   return (
     <React.Fragment>
       <Router>
-        
-        <NavBar></NavBar>
-        <div className="container-fluid page-body-wrapper">
-          <SideBar />
+          
           <Switch>
             <Route path="/" exact component={MainForm} />
             <Route path="/login" component={LoginForm} />
@@ -39,15 +36,14 @@ function App() {
             <Route path="/group" component={GroupForm} />
             <Route path="/passenger-profile" component={PassengerProfileForm} />
             <Route path="/driver-profile" component={DriverProfileForm} />
-            <Route path="/intro" component={IntroductionForm} />
-            <Route path="/guide" component={UserGuideForm} />
+            {/* <Route path="/intro" component={IntroductionForm} /> */}
+            {/* <Route path="/guide" component={UserGuideForm} /> */}
             <Route path="/find-group" component={ChooseGroup} />
             <Route path="/create-group" component={CreateGroup} />
 
             {/* <Route path="/group-register" component={RegisterForm} /> */}
 
           </Switch>
-        </div>
       </Router>
     </React.Fragment>
   );

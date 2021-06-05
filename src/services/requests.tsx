@@ -4,7 +4,6 @@ export const BASE_API_URL: string = `${process.env.REACT_APP_BASE_URL || 'localh
 
 const customAxios = axios.create({
   baseURL: BASE_API_URL,
-  withCredentials: true,
 });
 
 export default customAxios;

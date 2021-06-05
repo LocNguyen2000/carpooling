@@ -3,30 +3,12 @@ import { Link, Router, Redirect, useHistory } from "react-router-dom";
 // import PersonalLogin from '../../../public/images/faces/face1.jpg';
 
 const RegisterForm = () => {
-  // const buttonRef = useRef();
-  // const [isChecked, setIsChecked] = useState(false);
-  // const [values, setValues] = useState({
-  //     id: "",
-  // })
-  // const componentRef = useRef<HTMLInputElement | null>(null);
-
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const {name, value} = e.target;
-  //   setValues({
-  //       ...values,
-  //       [name]:value,
-  //   });
-  // setIsChecked(true);
-  // console.log(isChecked);
-  // console.log(name, value);
-
-  // };
   let history = useHistory();
   const handlePR = () => {
-    history.push("/personal-register");
+    history.push("/passenger-register");
   };
   const handleGR = () => {
-    history.push("/group-register");
+    history.push("/driver-register");
   };
 
   return (
@@ -88,7 +70,6 @@ const RegisterForm = () => {
                 </div>
               </div>
             </div>
-            {/* </span> */}
           </div>
         </section>
       </form>

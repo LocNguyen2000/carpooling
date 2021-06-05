@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import BeatLoader from "react-spinners/BeatLoader";
 
-export const MainForm = () => {
+export const MainForm = ({ history }) => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setInterval(() => setLoading(false), 2000);
+  },[])
+
+  if (loading) {
+    return (<div className='loading'>
+      <BeatLoader color='#123abc' loading={loading} size={20} />
+    </div>)
+  }
+
   return (
     <div className="main-panel">
       <div className="content-wrapper">
@@ -15,20 +28,20 @@ export const MainForm = () => {
             neighbors.{" "}
           </h6>
           <div className="justify-content-center d-flex py-3">
-              <button
-                className="btn btn-warning px-5 fs-40 text-primary"
-                type="button" 
-                // href = "login"
-                // id="dropdownMenuDate2"
-                // data-toggle="dropdown"
-                // aria-haspopup="true"
-                // aria-expanded="true"
-              >
-               <Link to="/login" target="" aria-label="Login" >
-                <div className = "text-dark font-weight-bold ">JOIN NOW!</div>
+            <button
+              className="btn btn-warning px-5 fs-40 text-primary"
+              type="button"
+            // href = "login"
+            // id="dropdownMenuDate2"
+            // data-toggle="dropdown"
+            // aria-haspopup="true"
+            // aria-expanded="true"
+            >
+              <Link to="/login" target="" aria-label="Login" >
+                <div className="text-dark font-weight-bold ">JOIN NOW!</div>
               </Link>
-              </button>
-              {/* <div
+            </button>
+            {/* <div
                 className="dropdown-menu dropdown-menu-right"
                 aria-labelledby="dropdownMenuDate2"
               >
@@ -40,8 +53,8 @@ export const MainForm = () => {
                 >
                   Register
                 </Link> */}
-            </div>
           </div>
+        </div>
         <div className="row pt-3">
           <div className="col-md-6 grid-margin stretch-card">
             <div className="card tale-bg">
@@ -50,8 +63,8 @@ export const MainForm = () => {
               </div> */}
               <div className="pt-4">
                 <Button className="btn-dark-blue d-flex m-auto mt-4">
-                <Link to="/intro" target="" aria-label="Login" >
-                Learn more about the ridesharing system
+                  <Link to="/intro" target="" aria-label="Login" >
+                    Learn more about the ridesharing system
               </Link>
                 </Button>
               </div>
@@ -85,26 +98,7 @@ export const MainForm = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="row">
-              <div className="col-md-6 mb-4 stretch-card transparent">
-                <div className="card card-tale card-dark-blue">
-                  <div className="card-body">
-                    <p className="mb-4">Ridesharing groups</p>
-                    <p className="fs-30 mb-2">13</p>
-                    <p>50 members</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 mb-4 stretch-card transparent">
-                <div className="card card-tale">
-                  <div className="card-body">
-                    <p className="mb-4">Available Seats</p>
-                    <p className="fs-30 mb-2">55</p>
-                    <p>3 available groups</p>
-                  </div>
-                </div>
-              </div>
-            </div> */}
+
             <div className="row">
               <div className="col-md-6 stretch-card transparent">
                 <div className="card card-light-blue">

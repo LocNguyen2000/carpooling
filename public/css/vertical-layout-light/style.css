@@ -28277,7 +28277,7 @@ div.tagsinput span.tag a {
 
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
-  width: calc(100% - 235px);
+  width: 100%;
   min-height: calc(100vh - 60px);
   display: -webkit-flex;
   display: flex;
@@ -29785,7 +29785,7 @@ div.tagsinput span.tag a {
     display: none;
   }
   .sidebar-mini .main-panel {
-    width: calc(100% - 185px);
+    width: 100%;
   }
   .sidebar-mini:not(.sidebar-icon-only) .sidebar .nav.sub-menu {
     padding: 0;

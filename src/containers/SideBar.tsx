@@ -254,22 +254,22 @@ export const SideBar = () => {
       </div>
       <nav className="sidebar sidebar-offcanvas" id="sidebar">
         <ul className="nav">
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a className="nav-link" href="/home">
               <i className="icon-grid menu-icon"></i>
               <span className="menu-title text-white">
                 Home
               </span>
             </a>
-          </li>
-          <li className="nav-item">
+          </li> */}
+          {/* <li className="nav-item">
             <a className="nav-link" href="/intro">
               <i className="icon-cog menu-icon"></i>
               <span className="menu-title">
               Introduction
               </span>
             </a>
-          </li>
+          </li> */}
           <li className="nav-item">
             <a
               className="nav-link"
@@ -298,7 +298,7 @@ export const SideBar = () => {
               </span>
             </a>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <a
               className="nav-link"
               data-toggle="collapse"
@@ -311,7 +311,7 @@ export const SideBar = () => {
                 <Link to="/guide">User Guide</Link>
               </span>
             </a>
-          </li>
+          </li> */}
           {/* <li className="nav-item">
             <a className="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
               <i className="icon-loader menu-icon"></i>
