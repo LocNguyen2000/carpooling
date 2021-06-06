@@ -3,6 +3,8 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import BeatLoader from "react-spinners/BeatLoader";
 
+
+
 export const MainForm = ({ history }) => {
   const [loading, setLoading] = useState(true);
 
@@ -63,9 +65,9 @@ export const MainForm = ({ history }) => {
               </div> */}
               <div className="pt-4">
                 <Button className="btn-dark-blue d-flex m-auto mt-4">
-                  <Link to="/intro" target="" aria-label="Login" >
+                  <a href="https://edu.gcfglobal.org/en/sharingeconomy/what-is-ridesharing/1/" target="_blank" aria-label="Login" >
                     Learn more about the ridesharing system
-              </Link>
+                  </a>
                 </Button>
               </div>
               <div className="card-people mt-auto">
