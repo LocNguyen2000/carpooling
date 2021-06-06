@@ -41,7 +41,7 @@ const PassengerRegisterForm = () => {
 
   const onSubmit_ = (data) => {
     setRegistering(true)
-    baseServices.registerDriver(data)
+    baseServices.registerPassenger(data)
       .then(res => {
         console.log('Register successfully')
         setShow(true)

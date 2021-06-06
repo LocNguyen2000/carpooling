@@ -1,10 +1,96 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavBar } from "../../containers/NavBar";
 import { SideBar } from "../../containers/SideBar";
+import { userServices } from "../../services";
 import "./ChooseGroup.css";
+import BeatLoader from "react-spinners/BeatLoader";
 
-function GroupForm() {
+
+interface User {
+  username: string;
+  displayname: any;
+  phone: string;
+  email: string;
+  gender: string;
+  id: number;
+  e_time_start: string;
+  l_time_start: string;
+  status: string;
+  role_string: string;
+}
+
+interface Group {
+  date_of_founded: string;
+  description: string;
+  id: number;
+  last_trip: string;
+  name: string;
+  period_of_existence: number;
+  status: string;
+  total_trips: number;
+  userid: number;
+}
+
+interface Coordinate {
+  description: string;
+  detour: number;
+  id: number;
+  latitude: string;
+  longitude: string;
+  name: string;
+  type: string;
+  userid: number;
+}
+
+interface Vehicle {
+  description: string;
+  driver_license: string;
+  id: number;
+  license_expire_date: string;
+  license_plate: string;
+  license_start_date: string;
+  seat: number;
+  userid: number;
+  vehicle_manufacturer: string;
+  vehicle_type: string;
+}
+
+function GroupForm({history}) {
+  const [loading, setLoading] = useState(true);
+  const [user, saveUser] = useState<null | User>(null);
+  const [group, setGroup] = useState<null | Group>(null);
+
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
+
+  useEffect(() => {
+    const authenticate = () => {
+      userServices
+        .user(localStorage.getItem("username"), config)
+        .then((res) => {
+          if (res.roles[0].role === "DRIVER") history.push("/driver-profile");
+          setLoading(false);
+          saveUser(res);
+          return res;
+        })
+        .then((result) => {
+          userServices.group(result.id, config).then((res) => {
+            if (res) setGroup(res);
+          });
+        })
+        .catch((err) => {
+          localStorage.clear();
+          history.push("/login");
+        });
+    };
+
+    authenticate();
+  }, []);
+
   return (
     <>
       <NavBar></NavBar>
@@ -24,45 +110,6 @@ function GroupForm() {
               </h3>
 
               <div className="form-group d-flex flex-column text-center text-align-center justify-content-center">
-                <div className="border">
-                  <h4 className="p-2">Ridesharing Information</h4>
-                  <table className="table table-responsive justify-content-center m-auto w-75 pl-3">
-                    <tbody>
-                      <tr>
-                        <td>Start Location</td>
-                        <td>101 Hoang Hoa Tham</td>
-                        <td>Finish Location</td>
-                        <td>10 Ly Nam De</td>
-                      </tr>
-                      <tr>
-                        <td>Earliest Start Time</td>
-                        <td>7:00 a.m</td>
-                        <td>Latest Start Time</td>
-                        <td>7:30 a.m</td>
-                      </tr>
-
-                      <tr>
-                        <td>Detour Distance</td>
-                        <td>3 km</td>
-                        <td>Note</td>
-                        <td>Girl only</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <button
-                    type="submit"
-                    className="btn btn-pill btn-primary rounded mx-auto font-weight-bold m-3"
-                  >
-                    <Link
-                      to="/profile"
-                      target="_blank"
-                      aria-label="Profile"
-                      className="text-white"
-                    >
-                      Edit ridesharing profile!
-                </Link>
-                  </button>
-                </div>
                 <div className="border">
                   <h4 className="p-2">Group Information</h4>
                   <div className="text-gray pb-3">0 Ridesharing Group</div>

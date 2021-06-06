@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { NavBar } from "../../containers/NavBar";
 import { SideBar } from "../../containers/SideBar";
-import { baseServices, userServices } from "../../services";
+import { baseServices, driverServices, userServices } from "../../services";
 import BeatLoader from "react-spinners/BeatLoader";
 import { Form } from "react-bootstrap";
 import { Field, Formik } from "formik";
@@ -13,6 +13,9 @@ interface User {
   email: string;
   gender: string;
   id: number;
+  e_start_time: string;
+  l_start_time: string;
+  role_string: string;
 }
 
 interface Vehicle {
@@ -40,31 +43,33 @@ function DriverProfileForm({ history }) {
   const [coordinate, setCoordinate] = useState<any | Coordinate>([]);
   const [vehicle, saveVehicle] = useState<any | Vehicle>(null);
   const formRefLeft = useRef<any>();
+  const formRefRight = useRef<any>();
+
+  const config = {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  };
   useEffect(() => {
     const authenticate = () => {
-      const config = {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      };
       userServices
         .user(localStorage.getItem("username"), config)
         .then((res) => {
-          if (res.roles[0].role !== "DRIVER")
+          if (res.role_string !== "DRIVER")
             history.push("/passenger-profile");
           setLoading(false);
           saveUser(res);
           return res;
         })
-        .then((res) => {
-          userServices.group(res.id, config).then((res) => {
+        .then((result) => {
+          console.log(result)
+          userServices.group(result.id, config).then((res) => {
             if (res.group) setGroup(true);
-            console.log(res);
           });
           userServices
-            .coordinate(res.id, config)
+            .coordinate(result.id, config)
             .then((res) => setCoordinate(res));
-          userServices.vehicle(res.id, config).then((res) => saveVehicle(res));
+          userServices.vehicle(result.id, config).then((res) => saveVehicle(res));
         })
         .catch((err) => {
           localStorage.clear();
@@ -116,6 +121,23 @@ function DriverProfileForm({ history }) {
     if (vehicle) setFieldValue();
   }, [vehicle]);
 
+  useEffect(() => {
+    const setFieldValue = () => {
+      const startInfo = coordinate.filter(item => item?.type === 'origin')[0]
+      const finishInfo = coordinate.filter(item => item?.type === 'destination')[0]
+      formRefRight.current.setFieldValue('start_location', startInfo?.name)
+      formRefRight.current.setFieldValue('start_detour', startInfo?.detour)
+      formRefRight.current.setFieldValue('start_details', startInfo?.description)
+      formRefRight.current.setFieldValue('finish_location', finishInfo?.name)
+      formRefRight.current.setFieldValue('finish_detour', finishInfo?.detour)
+      formRefRight.current.setFieldValue('finish_details', finishInfo?.description)
+      formRefRight.current.setFieldValue('e_start_time', user?.e_start_time)
+      formRefRight.current.setFieldValue('l_start_time', user?.l_start_time)
+    }
+    if (coordinate.length > 0) setFieldValue();
+  },[coordinate])
+
+
   const initialValues_ = {
     country: "Viet Nam",
     details: "",
@@ -135,25 +157,29 @@ function DriverProfileForm({ history }) {
 
   const onSubmit_ = (data) => {
     setSubmitting(true);
-    const config = {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    };
     userServices
       .updateUser(localStorage.getItem("password"), data, config)
       .then((res) => {
         saveUser(res);
       })
       .catch((err) => console.log(err));
-
-    userServices
+    if (vehicle) {
+      userServices
       .updateVehicle(vehicle?.id, data, config)
       .then((res) => {
         saveVehicle(res);
         setSubmitting(false);
       })
       .catch((err) => setSubmitting(false));
+    } else {
+      driverServices
+      .createVehicle(data, config)
+      .then((res) => {
+        saveVehicle(res);
+        setSubmitting(false);
+      })
+      .catch((err) => setSubmitting(false));
+    }
   };
 
   const initialValues_2 = {
@@ -477,6 +503,7 @@ function DriverProfileForm({ history }) {
                   <h5 className="text-left pl-3 ">Start Information</h5>
 
                   <Formik
+                    innerRef={formRefRight}
                     initialValues={initialValues_2}
                     onSubmit={onSubmitRide}
                   >

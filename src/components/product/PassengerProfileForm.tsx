@@ -14,6 +14,8 @@ interface User {
   email: string;
   gender: string;
   id: number;
+  e_start_time: string;
+  l_start_time: string;
 }
 
 interface Coordinate {
@@ -27,6 +29,8 @@ function PassengerProfileForm({ history }) {
   const [hasGroup, setGroup] = useState(false);
   const [coordinate, setCoordinate] = useState<any | Coordinate>([]);
   const formRefLeft = useRef<any>();
+  const formRefRight = useRef<any>();
+
   useEffect(() => {
     const authenticate = () => {
       const config = {
@@ -42,12 +46,12 @@ function PassengerProfileForm({ history }) {
           saveUser(res);
           return res;
         })
-        .then((res) => {
-          userServices.group(res.id, config).then((res) => {
+        .then((result) => {
+          userServices.group(result.id, config).then((res) => {
             if (res.group) setGroup(true);
           });
           userServices
-            .coordinate(res.id, config)
+            .coordinate(result.id, config)
             .then((res) => setCoordinate(res));
         })
         .catch((err) => {
@@ -71,6 +75,22 @@ function PassengerProfileForm({ history }) {
     };
     if (user) setFieldValue();
   }, [user]);
+
+  useEffect(() => {
+    const setFieldValue = () => {
+      const startInfo = coordinate.filter(item => item?.type === 'origin')[0]
+      const finishInfo = coordinate.filter(item => item?.type === 'destination')[0]
+      formRefRight.current.setFieldValue('start_location', startInfo?.name)
+      formRefRight.current.setFieldValue('start_detour', startInfo?.detour)
+      formRefRight.current.setFieldValue('start_details', startInfo?.description)
+      formRefRight.current.setFieldValue('finish_location', finishInfo?.name)
+      formRefRight.current.setFieldValue('finish_detour', finishInfo?.detour)
+      formRefRight.current.setFieldValue('finish_details', finishInfo?.description)
+      formRefRight.current.setFieldValue('e_start_time', user?.e_start_time)
+      formRefRight.current.setFieldValue('l_start_time', user?.l_start_time)
+    }
+    if (coordinate.length > 0) setFieldValue();
+  }, [coordinate])
 
   const initialValues_ = {
     displayname: "",
@@ -343,6 +363,7 @@ function PassengerProfileForm({ history }) {
                   </div>
                   <br></br>
                   <Formik
+                    innerRef={formRefRight}
                     initialValues={initialValues_2}
                     onSubmit={onSubmitRide}
                   >

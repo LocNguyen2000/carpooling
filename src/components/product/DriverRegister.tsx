@@ -41,13 +41,12 @@ const DriverRegisterForm = () => {
 
   const onSubmit_ = (data) => {
     setRegistering(true)
-    baseServices.registerPassenger(data)
+    baseServices.registerDriver(data)
       .then(res => {
         console.log('Register successfully')
         setShow(true)
       })
       .catch(err => {
-        console.log(err)
         setError(true)
       })
       .finally(() => setRegistering(false))
@@ -58,7 +57,6 @@ const DriverRegisterForm = () => {
     setError(false);
     formRef.current.handleReset();
   }
-  // isConstructorDeclaration(this.props.)
   return (
     <>
       {registering &&
@@ -71,7 +69,7 @@ const DriverRegisterForm = () => {
       <div className="container-fluid justify-content-center p-3 bg-light">
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Passenger register</Modal.Title>
+            <Modal.Title>Driver register</Modal.Title>
           </Modal.Header>
           <Modal.Body>Register successfully!</Modal.Body>
         </Modal>
@@ -95,7 +93,7 @@ const DriverRegisterForm = () => {
                     type="button"
                     className="btn btn-primary rounded btn-block pb-3 text-left font-weight-bold"
                   >
-                    Passenger Register Form
+                    Driver Register Form
                 </button>
 
                   {/* Thông tin cá nhân */}

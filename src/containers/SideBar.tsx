@@ -294,7 +294,7 @@ export const SideBar = () => {
             >
               <i className="icon-image menu-icon"></i>
               <span className="menu-title">
-                Group
+                <Link to="/group">Group</Link>
               </span>
             </a>
           </li>

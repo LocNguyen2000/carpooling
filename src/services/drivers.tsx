@@ -1,7 +1,7 @@
 import { DRIVER_API } from "../constants/api";
 import customAxios from "./requests";
 
-const createGroup = (param, config) => customAxios.post(DRIVER_API + 'create-coordinate', param, config).then(res => res.data)
+const createGroup = (param, config) => customAxios.post(DRIVER_API + 'create-group', param, config).then(res => res.data)
 
 const updateGroup = (id, config) => customAxios.put(DRIVER_API + `update-group/${id}`, config).then(res => res.data)
 

@@ -11,6 +11,8 @@ const search = (config) => customAxios.get(USER_API + 'search', config).then(res
 
 const user = (username, config) => customAxios.get(USER_API + `?username=${username}`, config).then(res => res.data)
 
+const userId = (userId, config) => customAxios.get(USER_API + `${userId}`, config).then(res => res.data)
+
 const updateUser = (pass, params, config) => customAxios.put(USER_API + `update?password=${pass}`, params, config).then(res => res.data)
 
 const deleteUsers = (id, config) => customAxios.delete(USER_API + `delete-user/${id}`, config).then(res => res.data)
@@ -27,9 +29,13 @@ const allGroups = (config) => customAxios.get(USER_API + `allgroups`, config).th
 
 const allPassengers = (config) => customAxios.get(USER_API + `allpassengers`, config).then(res => res.data)
 
+const inGroup = (groupid, config) => customAxios.get(USER_API + `ingroup/${groupid}`, config).then(res => res.data)
+
 const allDrivers = (config) => customAxios.get(USER_API + `alldrivers`, config).then(res => res.data)
 
 const allVehicles = (config) => customAxios.get(USER_API + `allvehicles`, config).then(res => res.data)
+
+const leaveGroup = (groupid, config) => customAxios.get(USER_API + `leave-group/${groupid}`, config).then(res => res.data)
 
 const updateCoordinate = (coordinateid, params, config) => customAxios.put(USER_API + `update-coordinate/${coordinateid}`, params, config).then(res => res.data)
 
@@ -49,7 +55,10 @@ export default {
     allVehicles,
     updateUser,
     updateCoordinate,
-    coordinate
+    coordinate,
+    inGroup,
+    userId,
+    leaveGroup
 }
 
 
