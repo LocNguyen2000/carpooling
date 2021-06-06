@@ -195,7 +195,7 @@ function GroupForm({ history }) {
                           <div className="card card-group">
                             <div className="additional">
                               <div className="user-card">
-                                <div className="level center">GROUP {index}</div>
+                                <div className="level center">Information</div>
                                 {/* <div className="points center">100m detour</div> */}
                                 <img
                                   className="rounded-circle pb-2 pt-3"
@@ -252,7 +252,7 @@ function GroupForm({ history }) {
                               </div>
                             </div>
                             <div className="general text-black ">
-                              <h3 className="pb-2">GROUP 1</h3>
+                              <h3 className="pb-2">GROUP {index+1}</h3>
                               <span className="pt-5 text-left">
                                 <p>Start location: {coordinates[index][0]?.name}</p>
                                 <p>Finish location: {coordinates[index][1]?.name}</p>

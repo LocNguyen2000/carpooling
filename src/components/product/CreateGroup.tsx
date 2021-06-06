@@ -162,15 +162,7 @@ const CreateGroup = ({ history }) => {
                       >
                         <section className="col-12 col-sm-12 col-md-8 rounded p-4">
                           {/* <button type="button" className="btn btn-primary">Thông tin cá nhân</button> */}
-                          <h3 className="text-left pb-3">
-                            <div
-                              className="btn btn-primary rounded btn-block pb-3 text-left font-weight-bold"
-                            >
-                              Group Register Form
-                        </div>
-
-                            {/* Thông tin cá nhân */}
-                          </h3>
+                          
 
                           <div className="form-group row">
                             <label className="col-sm-2 col-form-label">Name</label>
