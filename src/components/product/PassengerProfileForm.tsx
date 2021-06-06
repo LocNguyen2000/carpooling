@@ -70,7 +70,7 @@ function PassengerProfileForm({ history }) {
       formRefLeft.current.setFieldValue("email", user?.email || "");
       formRefLeft.current.setFieldValue(
         "gender",
-        user?.gender.toLocaleLowerCase() || ""
+        user?.gender?.toLocaleLowerCase() || ""
       );
     };
     if (user) setFieldValue();

@@ -52,14 +52,14 @@ const CreateGroup = ({ history }) => {
       userServices
         .user(localStorage.getItem("username"), config)
         .then((res) => {
-          if (res.roles[0].role !== "DRIVER") history.push("/find-group");
+          if (res.role_string !== "DRIVER") history.push("/find-group");
           setLoading(false);
           saveUser(res);
           return res;
         })
         .then((result) => {
           userServices.group(result.id, config).then((res) => {
-            if (res.group) history.push("/group");
+            if (res) history.push("/group");
           });
           userServices
             .coordinate(result.id, config)
@@ -83,7 +83,6 @@ const CreateGroup = ({ history }) => {
       formRefRight.current.setFieldValue('finish_location', finishInfo?.name)
       formRefRight.current.setFieldValue('finish_detour', finishInfo?.detour)
       formRefRight.current.setFieldValue('e_time_start', user?.e_time_start)
-      console.log(user?.e_time_start)
     }
     if (coordinate.length > 0 && user) setFieldValue();
   }, [coordinate, user])

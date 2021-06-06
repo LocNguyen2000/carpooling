@@ -37,6 +37,8 @@ const allVehicles = (config) => customAxios.get(USER_API + `allvehicles`, config
 
 const leaveGroup = (groupid, config) => customAxios.get(USER_API + `leave-group/${groupid}`, config).then(res => res.data)
 
+const joinGroup = (groupid, config) => customAxios.get(USER_API + `join-group/${groupid}`, config)
+
 const updateCoordinate = (coordinateid, params, config) => customAxios.put(USER_API + `update-coordinate/${coordinateid}`, params, config).then(res => res.data)
 
 export default {
@@ -58,7 +60,8 @@ export default {
     coordinate,
     inGroup,
     userId,
-    leaveGroup
+    leaveGroup,
+    joinGroup
 }
 
 
