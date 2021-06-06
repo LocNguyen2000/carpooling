@@ -23,7 +23,10 @@ function GroupMember() {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6 border p-3">
+            <div className="col-md-12 border p-3">
+            <div className="row pl-3 pb-2 font-weight-bold">
+                Group Information
+</div>
               <div className="row">
                 <label className="col-sm-4">Group Name:</label>
                 <div className="col-sm-8">Name</div>
@@ -45,7 +48,43 @@ function GroupMember() {
                   12 Ly Nam De, Hai Ba Trung, Ha Noi
                 </div>
               </div>
-              <div className="row border-top pt-2">
+              <div className="row">
+                <label className="col-sm-4">Description:</label>
+                <div className="col-sm-8">
+                  Welcome to our group!
+                </div>
+              </div>
+              <div className="row pt-2 pl-3 pb-2 font-weight-bold">
+                Vehicle Information
+</div>
+              <div className="row pb-2">
+                <div className="col-sm-4">Available Seats: </div>
+                <div className="col-sm-8">1</div>
+              </div>
+              <div className="row pb-2">
+                <div className="col-sm-4">Vehicle Type: </div>
+                <div className="col-sm-8">Car</div>
+              </div>
+              <div className="row pb-2">
+                <div className="col-sm-4">Vehicle Manufacture: </div>
+                <div className="col-sm-8">Yamaha</div>
+              </div>
+              <div className="row pb-2">
+                <div className="col-sm-4">License Plate: </div>
+                <div className="col-sm-8">90M1-9701</div>
+              </div>
+              <div className="row pt-2 pl-3 pb-2 font-weight-bold">
+                Member
+</div>
+              <div className="row pb-2 text-danger font-weight-bold">
+                <div className="col-sm-4">Driver: </div>
+                <div className="col-sm-8">Driver 1 - Phone number</div>
+              </div>
+              <div className="row pb-2">
+                <div className="col-sm-4">Passenger: </div>
+                <div className="col-sm-8">Passenger 1 - Phone number</div>
+              </div>
+              <div className="row border-top pt-4">
                 <div className="col-sm-4"> Group Action</div>
                 <div className="col-sm-8 d-flex justify-content-between">
                   <button
@@ -62,37 +101,9 @@ function GroupMember() {
                   </button>
                 </div>
               </div>
-            </div>
-            <div className="col-md-6 p-3 border">
-              <div className="d-flex flex-column text-align-center">
-                <div className="row">
-                <div className="col-md-4">Available Seats: </div>
-                  <div className="row pb-1 ">
-                    <div className="col-md-12 pr-5">1</div>
-                  </div>
-                  <div className="col-md-12 font-weight-normal pb-2">Member:</div>
-                  <div className="col-md-10">
-                    <div className="row pb-2 text-danger">
-                      <div className="col-md-12">Driver: Le Tam </div>
-                      <div className="col-md-12">Phone number: 0338566329</div>
-                    </div>
-                    <div className="row pt-1 pb-1">
-                      <div className="col-md-12">
-                        Passenger: Tran Van A
-                        {/* <div className="text-danger">(postponed)</div> */}
-                      </div>
+            </div>              
 
-                      <div className="col-md-12">Phone number: 0338566329</div>
-                    </div>
-                    <div className="row pb-1">
-                      <div className="col-md-12">Passenger: Nguyen Van B </div>
-                      <div className="col-md-12">Phone number: 0338566329</div>
-                    </div>
-                  </div>
-                 
-                </div>
-              </div>
-            </div>
+             
           </div>
         </section>
       </form>

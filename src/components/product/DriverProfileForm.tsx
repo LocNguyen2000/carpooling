@@ -7,29 +7,29 @@ import { Form } from "react-bootstrap";
 import { Field, Formik } from "formik";
 
 interface User {
-  username: string,
-  displayname: any,
-  phone: string,
-  email: string,
-  gender: string,
-  id: number,
+  username: string;
+  displayname: any;
+  phone: string;
+  email: string;
+  gender: string;
+  id: number;
 }
 
 interface Vehicle {
-  description: string,
-  driver_license: string,
-  id: number,
-  license_expire_date: string,
-  license_plate: string,
-  license_start_date: string,
-  seat: number,
-  userid: number,
-  vehicle_manufacturer: string,
-  vehicle_type: string,
+  description: string;
+  driver_license: string;
+  id: number;
+  license_expire_date: string;
+  license_plate: string;
+  license_start_date: string;
+  seat: number;
+  userid: number;
+  vehicle_manufacturer: string;
+  vehicle_type: string;
 }
 
 interface Coordinate {
-  type: string,
+  type: string;
 }
 
 function DriverProfileForm({ history }) {
@@ -44,59 +44,77 @@ function DriverProfileForm({ history }) {
     const authenticate = () => {
       const config = {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem('token'),
-        }
-      }
-      userServices.user(localStorage.getItem('username'), config)
-        .then(res => {
-          if (res.roles[0].role !== 'DRIVER')
-            history.push('/passenger-profile')
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      };
+      userServices
+        .user(localStorage.getItem("username"), config)
+        .then((res) => {
+          if (res.roles[0].role !== "DRIVER")
+            history.push("/passenger-profile");
           setLoading(false);
           saveUser(res);
           return res;
         })
-        .then(res => {
-          userServices.group(res.id, config)
-            .then(res => {
-              if (res.group) setGroup(true)
-              console.log(res)
-            })
-          userServices.coordinate(res.id, config)
-            .then(res => setCoordinate(res))
-          userServices.vehicle(res.id, config)
-            .then(res => saveVehicle(res))
+        .then((res) => {
+          userServices.group(res.id, config).then((res) => {
+            if (res.group) setGroup(true);
+            console.log(res);
+          });
+          userServices
+            .coordinate(res.id, config)
+            .then((res) => setCoordinate(res));
+          userServices.vehicle(res.id, config).then((res) => saveVehicle(res));
         })
-        .catch(err => {
+        .catch((err) => {
           localStorage.clear();
-          history.push('/login');
-        })
-    }
+          history.push("/login");
+        });
+    };
     authenticate();
-  }, [])
+  }, []);
 
   useEffect(() => {
     const setFieldValue = () => {
-      formRefLeft.current.setFieldValue('displayname', user?.displayname || '')
-      formRefLeft.current.setFieldValue('phone', user?.phone)
-      formRefLeft.current.setFieldValue('email', user?.email || '')
-      formRefLeft.current.setFieldValue('gender', user?.gender.toLocaleLowerCase() || '')
-    }
+      formRefLeft.current.setFieldValue("displayname", user?.displayname || "");
+      formRefLeft.current.setFieldValue("phone", user?.phone);
+      formRefLeft.current.setFieldValue("email", user?.email || "");
+      formRefLeft.current.setFieldValue(
+        "gender",
+        user?.gender.toLocaleLowerCase() || ""
+      );
+    };
     if (user) setFieldValue();
-  }, [user])
+  }, [user]);
 
   useEffect(() => {
     const setFieldValue = () => {
-      formRefLeft.current.setFieldValue('vehicle_type', vehicle?.vehicle_type)
-      formRefLeft.current.setFieldValue('vehicle_manufacturer', vehicle?.vehicle_manufacturer)
-      formRefLeft.current.setFieldValue('license_plate', vehicle?.license_plate)
-      formRefLeft.current.setFieldValue('driver_license', vehicle?.driver_license)
-      formRefLeft.current.setFieldValue('license_start_date', vehicle?.license_start_date)
-      formRefLeft.current.setFieldValue('license_expire_date', vehicle?.license_expire_date)
-      formRefLeft.current.setFieldValue('details', vehicle?.description)
-      formRefLeft.current.setFieldValue('seat', vehicle?.seat)
-    }
+      formRefLeft.current.setFieldValue("vehicle_type", vehicle?.vehicle_type);
+      formRefLeft.current.setFieldValue(
+        "vehicle_manufacturer",
+        vehicle?.vehicle_manufacturer
+      );
+      formRefLeft.current.setFieldValue(
+        "license_plate",
+        vehicle?.license_plate
+      );
+      formRefLeft.current.setFieldValue(
+        "driver_license",
+        vehicle?.driver_license
+      );
+      formRefLeft.current.setFieldValue(
+        "license_start_date",
+        vehicle?.license_start_date
+      );
+      formRefLeft.current.setFieldValue(
+        "license_expire_date",
+        vehicle?.license_expire_date
+      );
+      formRefLeft.current.setFieldValue("details", vehicle?.description);
+      formRefLeft.current.setFieldValue("seat", vehicle?.seat);
+    };
     if (vehicle) setFieldValue();
-  }, [vehicle])
+  }, [vehicle]);
 
   const initialValues_ = {
     country: "Viet Nam",
@@ -112,138 +130,158 @@ function DriverProfileForm({ history }) {
     phone: "",
     region: "Ha Noi",
     vehicle_type: "",
-    seat: '',
+    seat: "",
   };
 
   const onSubmit_ = (data) => {
     setSubmitting(true);
     const config = {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem('token'),
-      }
-    }
-    userServices.updateUser(localStorage.getItem('password'), data, config)
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    userServices
+      .updateUser(localStorage.getItem("password"), data, config)
       .then((res) => {
-        saveUser(res)
+        saveUser(res);
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
 
-    userServices.updateVehicle(vehicle?.id, data, config)
+    userServices
+      .updateVehicle(vehicle?.id, data, config)
       .then((res) => {
-        saveVehicle(res)
-        setSubmitting(false)
+        saveVehicle(res);
+        setSubmitting(false);
       })
-      .catch(err => setSubmitting(false))
-  }
+      .catch((err) => setSubmitting(false));
+  };
 
   const initialValues_2 = {
-    start_location: '',
-    start_detour: '',
-    start_details: '',
-    finish_location: '',
-    finish_detour: '',
-    finish_details: '',
-    e_start_time:'',
-    l_start_time: '',
-  }
+    start_location: "",
+    start_detour: "",
+    start_details: "",
+    finish_location: "",
+    finish_detour: "",
+    finish_details: "",
+    e_start_time: "",
+    l_start_time: "",
+  };
 
   const onSubmitRide = (data) => {
     setSubmitting(true);
     const isUpdatable = !(hasGroup && coordinate.length === 2);
     const config = {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem('token'),
-      }
-    }
-    baseServices.createCoor(data.start_location)
-      .then(res => res.hits[0])
-      .then(res => {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    baseServices
+      .createCoor(data.start_location)
+      .then((res) => res.hits[0])
+      .then((res) => {
         if (res) {
           const params = {
-            type: 'origin',
+            type: "origin",
             userid: user?.id,
             name: data.start_location,
             longitude: res.point.lng,
             latitude: res.point.lat,
             detour: data.start_detour,
-            description: data.start_details
-          }
+            description: data.start_details,
+          };
           if (!(hasGroup || coordinate.length === 2)) {
-            userServices.createCoordinate(params, config)
-            .then(() => setSubmitting(false))
-            .catch(err => setSubmitting(false))
+            userServices
+              .createCoordinate(params, config)
+              .then(() => setSubmitting(false))
+              .catch((err) => setSubmitting(false));
           } else if (isUpdatable) {
-            const coordinateId = coordinate.filter(item => item?.type === 'origin')[0].id
-            userServices.updateCoordinate(coordinateId, params, config)
-            .then(() => setSubmitting(false))
-            .catch(err => setSubmitting(false))
+            const coordinateId = coordinate.filter(
+              (item) => item?.type === "origin"
+            )[0].id;
+            userServices
+              .updateCoordinate(coordinateId, params, config)
+              .then(() => setSubmitting(false))
+              .catch((err) => setSubmitting(false));
           }
         }
-        setSubmitting(false)
+        setSubmitting(false);
       })
-      .catch(err => setSubmitting(false))
-    baseServices.createCoor(data.finish_location)
-      .then(res => res.hits[0])
-      .then(res => {
+      .catch((err) => setSubmitting(false));
+    baseServices
+      .createCoor(data.finish_location)
+      .then((res) => res.hits[0])
+      .then((res) => {
         if (res) {
           const params = {
-            type: 'destination',
+            type: "destination",
             userid: user?.id,
             name: data.finish_location,
             longitude: res.point.lng,
             latitude: res.point.lat,
             detour: data.finish_detour,
-            description: data.finish_details
-          }
+            description: data.finish_details,
+          };
           if (!(hasGroup || coordinate.length === 2)) {
-            userServices.createCoordinate(params, config)
-            .then(() => setSubmitting(false))
-            .catch(err => setSubmitting(false))
+            userServices
+              .createCoordinate(params, config)
+              .then(() => setSubmitting(false))
+              .catch((err) => setSubmitting(false));
           } else if (isUpdatable) {
-            const coordinateId = coordinate.filter(item => item?.type === 'destination')[0].id
-            userServices.updateCoordinate(coordinateId, params, config)
-            .then(() => setSubmitting(false))
-            .catch(err => setSubmitting(false))
+            const coordinateId = coordinate.filter(
+              (item) => item?.type === "destination"
+            )[0].id;
+            userServices
+              .updateCoordinate(coordinateId, params, config)
+              .then(() => setSubmitting(false))
+              .catch((err) => setSubmitting(false));
           }
         }
-        setSubmitting(false)
+        setSubmitting(false);
       })
-      .catch(err => setSubmitting(false))
-  }
+      .catch((err) => setSubmitting(false));
+  };
 
   if (loading || !user) {
-    return (<div className='loading'>
-      <BeatLoader color='#123abc' loading={loading} size={20} />
-    </div>)
+    return (
+      <div className="loading">
+        <BeatLoader color="#123abc" loading={loading} size={20} />
+      </div>
+    );
   }
 
   return (
     <>
       {isSubmitting && (
-        <div className='loading-container'>
-          <div className='loading'>
-            <BeatLoader color='#123abc' loading={isSubmitting} size={20} />
+        <div className="loading-container">
+          <div className="loading">
+            <BeatLoader color="#123abc" loading={isSubmitting} size={20} />
           </div>
-        </div>)
-      }
+        </div>
+      )}
       <NavBar></NavBar>
       <div className="container-fluid page-body-wrapper">
         <SideBar />
         <div className="container rounded bg-white mt-5 mb-5">
-          <div className="row">
-            <div className="col-md-2 border-right">
-              <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img
-                  className="rounded-circle mt-5"
-                  src="/images/faces/face2.jpg"
-                />
-                <span className="pt-3 font-weight-bold">{user?.displayname}</span>
+          <div className="col-md-12 border-bottom">
+            <div className="d-flex align-items-center justify-content-center text-center py-3">
+              <img className="rounded-circle" src="/images/faces/face2.jpg" />
+              <div className="pl-3 d-flex flex-column">
+                <span className="pt-3 font-weight-bold">
+                  {user?.displayname}
+                </span>
                 <span className="pb-2 font-weight-bold">Driver</span>
+
                 <span className="text-black-50">(+84) {user?.phone}</span>
-                <span className="text-black-50">{vehicle?.vehicle_manufacturer}</span>
-                <span className="text-black-50">{vehicle?.license_plate || '<license plate>'}</span>
+                <span className="text-black-50">
+                  {vehicle?.vehicle_manufacturer}
+                </span>
+                <span className="text-black-50">
+                  {vehicle?.license_plate || "<license plate>"}
+                </span>
               </div>
             </div>
+          </div>
+          <div className="row">
             <div className="col-md-6 border-right">
               <Formik
                 innerRef={formRefLeft}
@@ -251,17 +289,25 @@ function DriverProfileForm({ history }) {
                 onSubmit={onSubmit_}
               >
                 {({ handleSubmit }) => (
-                  <Form onSubmit={(e) => { e.preventDefault(); handleSubmit() }} className="p-3 py-4">
+                  <Form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleSubmit();
+                    }}
+                    className="p-3 py-4"
+                  >
                     <div className="d-flex justify-content-between align-items-center mb-3">
                       <h4 className="text-right">Profile Settings</h4>
                     </div>
-                    <h5 className="text-left pb-2 ">Personal Profile Information</h5>
+                    <h5 className="text-left pb-2 ">
+                      Personal Profile Information
+                    </h5>
 
                     <div className="row mt-3">
                       <div className="col-md-6">
                         <label className="labels">Name</label>
                         <Field
-                          name='displayname'
+                          name="displayname"
                           type="text"
                           className="form-control"
                           placeholder="Name"
@@ -270,7 +316,7 @@ function DriverProfileForm({ history }) {
                       <div className="col-md-6">
                         <label className="labels">Gender</label>
                         <Field
-                          as='select'
+                          as="select"
                           name="gender"
                           className="form-control"
                           data-style="btn-primary"
@@ -289,7 +335,7 @@ function DriverProfileForm({ history }) {
                           type="text"
                           className="form-control"
                           placeholder="enter phone number"
-                          name='phone'
+                          name="phone"
                         />
                       </div>
                       <div className="col-md-6">
@@ -298,7 +344,7 @@ function DriverProfileForm({ history }) {
                           type="email"
                           className="form-control"
                           placeholder="re-enter password"
-                          name='email'
+                          name="email"
                         />
                       </div>
                     </div>
@@ -308,7 +354,7 @@ function DriverProfileForm({ history }) {
                         <Field
                           type="text"
                           className="form-control"
-                          name='country'
+                          name="country"
                         />
                       </div>
 
@@ -317,7 +363,7 @@ function DriverProfileForm({ history }) {
                         <input
                           type="text"
                           className="form-control"
-                          name='region'
+                          name="region"
                         />
                       </div>
                     </div>
@@ -327,15 +373,15 @@ function DriverProfileForm({ history }) {
                         <div className="col-md-6">
                           <label className="labels">Type</label>
                           <Field
-                            as='select'
+                            as="select"
                             className="form-control"
                             data-style="btn-primary"
                             data-width="20px"
                             data-size="2"
-                            name='vehicle_type'
+                            name="vehicle_type"
                           >
-                            <option value='car'>Car</option>
-                            <option value='motorbike'>Motorbike</option>
+                            <option value="car">Car</option>
+                            <option value="motorbike">Motorbike</option>
                           </Field>
                         </div>
                         <div className="col-md-6">
@@ -343,7 +389,7 @@ function DriverProfileForm({ history }) {
                           <Field
                             type="text"
                             className="form-control"
-                            name='vehicle_manufacturer'
+                            name="vehicle_manufacturer"
                           />
                         </div>
                       </div>
@@ -353,7 +399,7 @@ function DriverProfileForm({ history }) {
                           <Field
                             type="text"
                             className="form-control"
-                            name='license_plate'
+                            name="license_plate"
                           />
                         </div>
                         <div className="col-md-6">
@@ -361,7 +407,7 @@ function DriverProfileForm({ history }) {
                           <Field
                             type="text"
                             className="form-control"
-                            name='driver_license'
+                            name="driver_license"
                           />
                         </div>
                       </div>
@@ -371,7 +417,7 @@ function DriverProfileForm({ history }) {
                           <Field
                             type="text"
                             className="form-control"
-                            name='license_start_date'
+                            name="license_start_date"
                           />
                         </div>
                         <div className="col-md-6">
@@ -380,35 +426,37 @@ function DriverProfileForm({ history }) {
                           <Field
                             type="text"
                             className="form-control"
-                            name='license_expire_date'
+                            name="license_expire_date"
                           />
                         </div>
                       </div>
+
                       <div className="row mt-3">
                         <div className="col-md-6">
                           <label className="labels">Available seats</label>
                           <Field
                             type="text"
                             className="form-control"
-                            name='seat'
+                            name="seat"
                           />
                         </div>
-                      </div>
-                      <div className="row mt-3">
-                        <div className="col-md-12 pt-3">
+                        <div className="col-md-6">
                           <label className="labels">Additional Details</label>
                           {/* <div className = "form-control border-none"> */}
                           <Field
                             type="text"
                             className="form-control"
-                            name='details'
+                            name="details"
                           />
                           {/* </div> */}
                         </div>
                       </div>
                     </div>
                     <div className="mt-4 text-center">
-                      <button className="btn btn-primary profile-button" type="submit">
+                      <button
+                        className="btn btn-primary profile-button"
+                        type="submit"
+                      >
                         Save Personal Profile
                       </button>
                     </div>
@@ -416,7 +464,7 @@ function DriverProfileForm({ history }) {
                 )}
               </Formik>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-6">
               <div className="p-3 py-4">
                 <div className="d-flex justify-content-between align-items-center rideshare-profile">
                   <h4 className="text-right pl-3">Ridesharing Profile</h4>
@@ -427,55 +475,66 @@ function DriverProfileForm({ history }) {
                 <br></br>
                 <div className="d-flex flex-column text-align-center">
                   <h5 className="text-left pl-3 ">Start Information</h5>
-                  
+
                   <Formik
                     initialValues={initialValues_2}
                     onSubmit={onSubmitRide}
                   >
                     {({ handleSubmit }) => (
-                      <Form onSubmit={(e) => { e.preventDefault(); handleSubmit() }}>
+                      <Form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          handleSubmit();
+                        }}
+                      >
                         <div className="d-flex flex-column text-align-center">
-      
                           <div className="row mt-3 px-3">
                             <div className="col-md-6">
                               <label className="labels">Start Location</label>
                               <Field
-                                name='start_location'
+                                name="start_location"
                                 type="text"
-                                className="form-control" />
+                                className="form-control"
+                              />
                             </div>
                             <div className="col-md-6">
                               <label className="labels">Start City</label>
                               <Field
-                                as='select'
-                                name='start_city'
+                                as="select"
+                                name="start_city"
                                 className="form-control"
                                 data-style="btn-primary"
                                 data-width="20px"
                                 data-size="5"
                               >
-                                <option value='hanoi'>Ha Noi</option>
-                                <option value='bacninh'>Bac Ninh</option>
-                                <option value='hungyen'>Hung Yen</option>
-                                <option value='bacgiang'>Bac Giang</option>
-                                <option value='vinhphuc'>Vinh Phuc</option>
+                                <option value="hanoi">Ha Noi</option>
+                                <option value="bacninh">Bac Ninh</option>
+                                <option value="hungyen">Hung Yen</option>
+                                <option value="bacgiang">Bac Giang</option>
+                                <option value="vinhphuc">Vinh Phuc</option>
                               </Field>
                             </div>
                           </div>
                           <div className="row mt-3 px-3">
                             <div className="col-md-6">
-                              <label className="labels">Earliest Start Time</label>
+                              <label className="labels">
+                                Earliest Start Time
+                              </label>
                               <Field
-                                name='e_start_time'
+                                name="e_start_time"
                                 type="text"
-                                className="form-control" />
+                                className="form-control"
+                              />
                             </div>
                             <div className="col-md-6">
-                              <label className="labels">Latest Start Time</label>
+                              <label className="labels">
+                                Latest Start Time
+                              </label>
                               <Field
-                                name='l_start_time'
+                                name="l_start_time"
                                 type="text"
-                                className="form-control" />
+                                className="form-control"
+                              />
                             </div>
                           </div>
                           <div className="col-md-12 pt-3 pb-3">
@@ -483,7 +542,7 @@ function DriverProfileForm({ history }) {
                             <Field
                               type="number"
                               className="form-control"
-                              name='start_detour'
+                              name="start_detour"
                             />
                           </div>
                           <div className="col-md-12 pt-3 pb-3">
@@ -491,10 +550,13 @@ function DriverProfileForm({ history }) {
                             <Field
                               type="text"
                               className="form-control"
-                              name='start_details'
+                              name="start_details"
                             />
                           </div>
-                          <div className="form-control " style={{ opacity: "0" }}>
+                          <div
+                            className="form-control "
+                            style={{ opacity: "0" }}
+                          >
                             {" "}
                           </div>
                         </div>
@@ -504,7 +566,7 @@ function DriverProfileForm({ history }) {
                             <div className="col-md-6">
                               <label className="labels">Finish Location</label>
                               <Field
-                                name='finish_location'
+                                name="finish_location"
                                 type="text"
                                 className="form-control"
                               />
@@ -512,36 +574,40 @@ function DriverProfileForm({ history }) {
                             <div className="col-md-6">
                               <label className="labels">Finish City</label>
                               <Field
-                                as='select'
-                                name='finish_city'
+                                as="select"
+                                name="finish_city"
                                 className="form-control"
                                 data-style="btn-primary"
                                 data-width="20px"
                                 data-size="5"
                               >
-                                <option value='hanoi'>Ha Noi</option>
-                                <option value='bacninh'>Bac Ninh</option>
-                                <option value='hungyen'>Hung Yen</option>
-                                <option value='bacgiang'>Bac Giang</option>
-                                <option value='vinhphuc'>Vinh Phuc</option>
+                                <option value="hanoi">Ha Noi</option>
+                                <option value="bacninh">Bac Ninh</option>
+                                <option value="hungyen">Hung Yen</option>
+                                <option value="bacgiang">Bac Giang</option>
+                                <option value="vinhphuc">Vinh Phuc</option>
                               </Field>
                             </div>
                           </div>
-                          <div className="col-md-12 pt-3 pb-3">
-                            <label className="labels">Detour</label>
-                            <Field
-                              type="number"
-                              className="form-control"
-                              name='finish_detour'
-                            />
-                          </div>
-                          <div className="col-md-12 pt-3">
-                            <label className="labels">Additional Details</label>
-                            <Field
-                              name='finish_details'
-                              type="text"
-                              className="form-control"
-                            />
+                          <div className="row mt-3 px-3">
+                            <div className="col-md-6 pt-3 pb-3">
+                              <label className="labels">Detour</label>
+                              <Field
+                                type="number"
+                                className="form-control"
+                                name="finish_detour"
+                              />
+                            </div>
+                            <div className="col-md-6 pt-3">
+                              <label className="labels">
+                                Additional Details
+                              </label>
+                              <Field
+                                name="finish_details"
+                                type="text"
+                                className="form-control"
+                              />
+                            </div>
                           </div>
                           <div className="mt-4 text-center">
                             <button

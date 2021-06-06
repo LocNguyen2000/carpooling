@@ -6,7 +6,7 @@ export const NavBar = () => {
         <>
         <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a className="navbar-brand brand-logo mr-5" href="index.html"><img src="https://png2.cleanpng.com/sh/b524e8d8c4f88df408073570628a5598/L0KzQYq3VsI3N6FngpH0aYP2gLBuTfNieqF0h942cHXogn77j71xbZZ3ReRyZHX2eLL5if5oNZ10f9G2bInphH7qjf8ubaR5ReZ7aYDncX68hME0aWY6TKIEYkLnR3ABWck6PGU8TqMANkG4Rom8WcYxO2o8RuJ3Zx==/kisspng-carpool-peer-to-peer-ridesharing-logo-lyft-cmo-est-tripda-5d13a55409b2d7.8999447615615685960397.png" className="ml-5" alt="logo"/></a>
+        <a className="navbar-brand brand-logo mr-5" href="/group"><img src="https://png2.cleanpng.com/sh/b524e8d8c4f88df408073570628a5598/L0KzQYq3VsI3N6FngpH0aYP2gLBuTfNieqF0h942cHXogn77j71xbZZ3ReRyZHX2eLL5if5oNZ10f9G2bInphH7qjf8ubaR5ReZ7aYDncX68hME0aWY6TKIEYkLnR3ABWck6PGU8TqMANkG4Rom8WcYxO2o8RuJ3Zx==/kisspng-carpool-peer-to-peer-ridesharing-logo-lyft-cmo-est-tripda-5d13a55409b2d7.8999447615615685960397.png" className="ml-5" alt="logo"/></a>
         {/* <a className="navbar-brand brand-logo-mini" href="index.html"><img src="https://www.bootstrapdash.com/demo/skydash/template/images/logo-mini.svg" alt="logo"/></a> */}
       </div>
       <div className="navbar-menu-wrapper d-flex align-items-center justify-content-end">
