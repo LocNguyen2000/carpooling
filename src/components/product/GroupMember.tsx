@@ -41,13 +41,25 @@ function GroupMember() {
                 <div className="col-sm-8">
                   120 Hoang Hoa Tham, Tay Ho, Ha Noi
                 </div>
-              </div>
+                </div>
+                <div className="row">
+                <label className="col-sm-4">Detail:</label>
+                <div className="col-sm-8">
+                  Alley on the left of Thu Cuc Hospital
+                </div>
+                </div>
               <div className="row">
                 <label className="col-sm-4">Finish Location:</label>
                 <div className="col-sm-8">
                   12 Ly Nam De, Hai Ba Trung, Ha Noi
                 </div>
               </div>
+              <div className="row">
+                <label className="col-sm-4">Detail:</label>
+                <div className="col-sm-8">
+                  Behind Detect Tower
+                </div>
+                </div>
               <div className="row">
                 <label className="col-sm-4">Description:</label>
                 <div className="col-sm-8">
